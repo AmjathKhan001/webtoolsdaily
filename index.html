@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebTools Daily - Free Online Utility Tools | Image Converter & More</title>
+    <meta name="description" content="Free online tools for everyday tasks - image converter, password generator, unit converter, QR generator, and more. No sign-up required. All tools work directly in your browser.">
+    <meta name="keywords" content="free online tools, image converter, password generator, unit converter, qr code generator, web utilities, online tools, browser tools">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "WebTools Daily - Free Online Tools",
+      "description": "Free online tools including image converter, password generator, unit converter, and more. No installation required.",
+      "url": "https://webtoolsdaily.com",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "permissions": "browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+
+    <meta property="og:title" content="WebTools Daily - Free Online Utility Tools">
+    <meta property="og:description" content="15+ free online tools for everyday tasks. No sign-up required. All tools work directly in your browser.">
+    <meta property="og:url" content="https://webtoolsdaily.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WebTools Daily - Free Online Tools">
+    <meta name="twitter:description" content="15+ free online tools for everyday tasks. No installation required.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VB6549D0LW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VB6549D0LW', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6687860250561653"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tool-container { transition: all 0.3s ease; }
+        .tool-container:hover { transform: translateY(-2px); }
+        #dropZone { border: 2px dashed #3b82f6; transition: all 0.3s ease; }
+        #dropZone.dragover { background-color: #eff6ff; border-color: #1d4ed8; }
+        .ad-container { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .copy-success { animation: copyPulse 0.5s ease-in-out; }
+        @keyframes copyPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .tool-grid-item { transition: all 0.3s ease; }
+        .tool-grid-item:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .loading { opacity: 0.6; pointer-events: none; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fas fa-tools text-blue-500 text-xl"></i>
+                <span class="text-xl font-bold text-gray-800">WebTools Daily</span>
+            </a>
+            <nav class="flex items-center space-x-4">
+                <a href="tools.html" class="text-gray-600 hover:text-blue-500 transition-colors">All Tools</a>
+                <a href="blog.html" class="text-gray-600 hover:text-blue-500 transition-colors">Blog</a>
+                <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors flex items-center space-x-2">
+                    <i class="fas fa-heart"></i>
+                    <span>Support Us</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 mt-4">
+        <div class="ad-container text-center">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6687860250561653"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6687860250561653"
+                 data-ad-slot="6355412239"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Instantly Convert Your Images to Any Format, Free
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Your fast, free, and privacy-focused utility tools. All tools work directly in your browser - no uploads required.
+            </p>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-6 max-w-4xl mx-auto tool-container">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Image Format Converter</h2>
+                    <p class="text-gray-600">Convert JPG, PNG, and WebP images instantly in your browser - your files never leave your device</p>
+                </div>
+                
+                <div id="dropZone" class="border-2 border-dashed border-blue-500 rounded-lg p-8 text-center mb-6 cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-blue-500 text-4xl mb-4"></i>
+                    <p class="text-lg font-semibold text-gray-700">Drop your image here or click to browse</p>
+                    <p class="text-sm text-gray-500 mt-2">Supports JPG, PNG, WebP (Max: 5MB)</p>
+                    <input type="file" id="fileInput" class="hidden" accept="image/*">
+                </div>
+                
+                <div id="previewSection" class="hidden mb-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-semibold text-gray-700 mb-2">Original Image</h3>
+                            <div id="originalPreview" class="border rounded-lg p-4 bg-gray-50"></div>
+                            <div id="originalInfo" class="text-sm text-gray-500 mt-2 text-center"></div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-700 mb-2">Converted Image</h3>
+                            <div id="convertedPreview" class="border rounded-lg p-4 bg-gray-50"></div>
+                            <div id="convertedInfo" class="text-sm text-gray-500 mt-2 text-center"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-3 justify-center mb-6" id="convertButtons">
+                    <button onclick="convertImage('png')" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors flex items-center space-x-2">
+                        <i class="fas fa-file-image"></i>
+                        <span>Convert to PNG</span>
+                    </button>
+                    <button onclick="convertImage('webp')" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors flex items-center space-x-2">
+                        <i class="fas fa-file-image"></i>
+                        <span>Convert to WebP</span>
+                    </button>
+                    <button onclick="convertImage('jpeg')" class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors flex items-center space-x-2">
+                        <i class="fas fa-file-image"></i>
+                        <span>Convert to JPG</span>
+                    </button>
+                </div>
+                
+                <div id="downloadSection" class="hidden text-center">
+                    <a id="downloadLink" class="bg-purple-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-600 transition-colors inline-flex items-center space-x-2">
+                        <i class="fas fa-download"></i>
+                        <span>Download Converted Image</span>
+                    </a>
+                </div>
+
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h4 class="font-semibold text-blue-800 mb-2">Need Professional Image Editing?</h4>
+                    <p class="text-blue-700 text-sm mb-3">For advanced editing features, check out professional software</p>
+                    <a href="https://amzn.to/4oP9zRN" target="_blank" rel="sponsored nofollow" class="bg-yellow-500 text-white px-4 py-2 rounded text-sm hover:bg-yellow-600 inline-flex items-center">
+                        <i class="fab fa-amazon mr-2"></i>Shop on Amazon
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container mx-auto px-4 mt-8">
+        <div class="ad-container text-center">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6687860250561653"></script>
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-6687860250561653"
+                 data-ad-slot="2261623910"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-10">More Tools You'll Love (21+ Total)</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <a href="tools.html#password-generator" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-yellow-500">
+                    <i class="fas fa-key text-yellow-500 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Password Generator</h3>
+                    <p class="text-xs text-gray-500 mt-1">Create strong, secure passwords</p>
+                </a>
+                <a href="tools.html#json-formatter" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-indigo-500">
+                    <i class="fas fa-code text-indigo-500 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">JSON Formatter</h3>
+                    <p class="text-xs text-gray-500 mt-1">Clean and validate JSON</p>
+                </a>
+                <a href="tools.html#unit-converter" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-orange-500">
+                    <i class="fas fa-calculator text-orange-500 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Unit Converter</h3>
+                    <p class="text-xs text-gray-500 mt-1">Convert measurements</p>
+                </a>
+                <a href="tools.html#qr-generator" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-fuchsia-500">
+                    <i class="fas fa-qrcode text-fuchsia-500 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">QR Generator</h3>
+                    <p class="text-xs text-gray-500 mt-1">Create QR codes</p>
+                </a>
+                <a href="tools.html#word-counter" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-cyan-500">
+                    <i class="fas fa-font text-cyan-500 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Word Counter</h3>
+                    <p class="text-xs text-gray-500 mt-1">Count words & characters</p>
+                </a>
+                <a href="tools.html#regex-tester" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-purple-500">
+                    <i class="fas fa-search text-purple-500 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">RegEx Tester</h3>
+                    <p class="text-xs text-gray-500 mt-1">Test expressions easily</p>
+                </a>
+                <a href="tools.html#csv-to-json" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-teal-500">
+                    <i class="fas fa-exchange-alt text-teal-500 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">CSV to JSON</h3>
+                    <p class="text-xs text-gray-500 mt-1">Data format converter</p>
+                </a>
+                <a href="tools.html#base-converter" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-blue-700">
+                    <i class="fas fa-hashtag text-blue-700 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Base Converter</h3>
+                    <p class="text-xs text-gray-500 mt-1">Dec, Hex, Bin conversion</p>
+                </a>
+                <a href="tools.html#slug-generator" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-indigo-700">
+                    <i class="fas fa-link text-indigo-700 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Slug Generator</h3>
+                    <p class="text-xs text-gray-500 mt-1">Create URL-friendly text</p>
+                </a>
+                <a href="tools.html#item-sorter" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-red-600">
+                    <i class="fas fa-sort-alpha-down text-red-600 text-2xl mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Line Sorter</h3>
+                    <p class="text-xs text-gray-500 mt-1">Sort lists alphabetically</p>
+                </a>
+                <a href="tools.html" class="bg-blue-50 p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-blue-500 border-dashed flex items-center justify-center">
+                    <div>
+                        <i class="fas fa-ellipsis-h text-blue-500 text-2xl mb-3"></i>
+                        <h3 class="font-semibold text-blue-700">View All 21+ Tools</h3>
+                        <p class="text-xs text-blue-500 mt-1">Go to the tools page</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-16 bg-white" id="blog-section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-10">Latest Guides & Tutorials</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
+                    <div class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full inline-block mb-4"> Security </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">How to Create Strong Passwords</h3>
+                    <p class="text-gray-600 mb-4">Learn best practices for creating secure passwords that protect your online accounts from hackers.</p>
+                    <div class="text-blue-500 hover:text-blue-600 font-semibold inline-flex items-center">
+                        <span>Coming Soon</span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
+                    <div class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full inline-block mb-4"> Design </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Image Format Comparison Guide</h3>
+                    <p class="text-gray-600 mb-4">Understand when to use JPG, PNG, or WebP for optimal quality and file size.</p>
+                    <div class="text-blue-500 hover:text-blue-600 font-semibold inline-flex items-center">
+                        <span>Coming Soon</span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
+                    <div class="bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full inline-block mb-4"> Development </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">JSON Best Practices for Web Developers</h3>
+                    <p class="text-gray-600 mb-4">Tips and tricks for handling and formatting JSON data like a pro in your web projects.</p>
+                    <div class="text-blue-500 hover:text-blue-600 font-semibold inline-flex items-center">
+                        <span>Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="blog.html" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors inline-flex items-center">
+                    <span>View All Articles</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-10">What Our Users Say</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-blue-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-semibold">Sarah K.</div>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The image converter is a lifesaver! It's so fast and I love that my images never leave my browser. Perfect for quick edits."</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-yellow-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-semibold">Mark W.</div>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"I use the password generator for all my online accounts now. So much better than coming up with weak passwords myself."</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-green-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-semibold">Mike R.</div>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"As a developer, I use the JSON formatter daily. It's incredibly fast and the fact that it works offline is a huge plus for privacy."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-10 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <div class="flex items-center justify-center md:justify-start space-x-2">
+                        <i class="fas fa-tools text-blue-400"></i>
+                        <span class="text-xl font-bold">WebTools Daily</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2">Free online utilities for everyday tasks</p>
+                </div>
+                <div class="flex flex-wrap justify-center space-x-6 text-sm">
+                    <a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="affiliate.html" class="text-gray-400 hover:text-white transition-colors">Affiliate Disclosure</a>
+                    <a href="blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a>
+                    <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="text-orange-400 hover:text-orange-300 transition-colors flex items-center space-x-1">
+                        <i class="fas fa-coffee"></i>
+                        <span>Buy Me a Coffee</span>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 WebTools Daily. All rights reserved. | webtoolsdaily.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced Image Converter with Error Handling
+        let currentImage = null;
+        let originalFileName = '';
+        let originalFileSize = 0;
+
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+
+        function displayOriginalImage(img, fileSize) {
+            const originalPreview = document.getElementById('originalPreview');
+            const originalInfo = document.getElementById('originalInfo');
+            const previewSection = document.getElementById('previewSection');
+            
+            originalPreview.innerHTML = '';
+            
+            // Create image element for display
+            const displayImg = document.createElement('img');
+            displayImg.src = img.src;
+            displayImg.className = 'max-w-full h-auto mx-auto rounded-lg shadow-md';
+            displayImg.style.maxHeight = '200px';
+            
+            originalPreview.appendChild(displayImg);
+            
+            originalInfo.textContent = `${img.width} × ${img.height} pixels • ${formatBytes(fileSize)}`;
+            previewSection.classList.remove('hidden');
+            document.getElementById('convertedPreview').innerHTML = '';
+            document.getElementById('convertedInfo').textContent = 'Awaiting Conversion...';
+            document.getElementById('downloadSection').classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+
+            dropZone.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+            
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragover');
+            });
+            
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                if (e.dataTransfer.files.length) {
+                    handleImageFile(e.dataTransfer.files[0]);
+                }
+            });
+
+            // Track page view
+            gtag('event', 'page_view', {
+                page_title: 'WebTools Daily Home',
+                page_location: 'https://webtoolsdaily.com'
+            });
+        });
+
+        function handleFileSelect(e) {
+            if (e.target.files.length > 0) {
+                handleImageFile(e.target.files[0]);
+            }
+        }
+
+        function handleImageFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file.');
+                return;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size exceeds 5MB limit.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    currentImage = img;
+                    originalFileName = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
+                    originalFileSize = file.size;
+                    displayOriginalImage(img, file.size);
+                    document.getElementById('convertButtons').classList.remove('hidden');
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function convertImage(format) {
+            if (!currentImage) {
+                alert('Please select an image first.');
+                return;
+            }
+            
+            document.body.classList.add('loading');
+            document.getElementById('convertButtons').querySelectorAll('button').forEach(btn => btn.disabled = true);
+            
+            await new Promise(resolve => setTimeout(resolve, 50)); // Small delay for UI update
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = currentImage.width;
+            canvas.height = currentImage.height;
+            ctx.drawImage(currentImage, 0, 0);
+
+            let mimeType;
+            let quality = 0.9;
+            if (format === 'jpeg' || format === 'jpg') {
+                mimeType = 'image/jpeg';
+            } else if (format === 'webp') {
+                mimeType = 'image/webp';
+                quality = 0.9;
+            } else if (format === 'png') {
+                mimeType = 'image/png';
+                quality = 1.0;
+            } else {
+                alert('Unsupported format.');
+                document.body.classList.remove('loading');
+                document.getElementById('convertButtons').querySelectorAll('button').forEach(btn => btn.disabled = false);
+                return;
+            }
+            
+            try {
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, mimeType, quality));
+                const dataUrl = URL.createObjectURL(blob); 
+                const sizeKB = formatBytes(blob.size);
+                
+                displayConvertedImage(dataUrl, sizeKB, format);
+                setupDownloadLink(dataUrl, format);
+                
+                gtag('event', 'tool_used', {
+                    tool_name: 'Image Converter',
+                    action: 'convert',
+                    format: format,
+                    image_width: currentImage.width,
+                    image_height: currentImage.height
+                });
+            } catch (error) {
+                alert('Error converting image: ' + error.message);
+            } finally {
+                document.body.classList.remove('loading');
+                document.getElementById('convertButtons').querySelectorAll('button').forEach(btn => btn.disabled = false);
+            }
+        }
+
+        function displayConvertedImage(dataUrl, sizeKB, format) {
+            const convertedPreview = document.getElementById('convertedPreview');
+            const convertedInfo = document.getElementById('convertedInfo');
+            
+            convertedPreview.innerHTML = '';
+            
+            const displayImg = document.createElement('img');
+            displayImg.src = dataUrl;
+            displayImg.className = 'max-w-full h-auto mx-auto rounded-lg shadow-md';
+            displayImg.style.maxHeight = '200px';
+
+            convertedPreview.appendChild(displayImg);
+            convertedInfo.textContent = `${currentImage.width} × ${currentImage.height} pixels • ${sizeKB} • ${format.toUpperCase()}`;
+        }
+
+        function setupDownloadLink(dataUrl, format) {
+            const downloadSection = document.getElementById('downloadSection');
+            const downloadLink = document.getElementById('downloadLink');
+            const fileName = `${originalFileName}.${format}`;
+            
+            downloadLink.href = dataUrl;
+            downloadLink.download = fileName;
+            downloadLink.innerHTML = `<i class="fas fa-download"></i><span>Download ${format.toUpperCase()} Image</span>`;
+            downloadSection.classList.remove('hidden');
+            
+            // Scroll to download section
+            downloadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Track outbound links
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('a[href*="amzn.to"]')) {
+                gtag('event', 'affiliate_click', {
+                    affiliate_network: 'Amazon',
+                    product_category: 'Professional Tools',
+                    location: 'homepage'
+                });
+            }
+            if (e.target.closest('a[href*="buymeacoffee.com"]')) {
+                gtag('event', 'donation_click', {
+                    platform: 'Buy Me a Coffee',
+                    location: 'homepage'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
