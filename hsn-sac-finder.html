@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSN & SAC Code Finder - WebTools Daily</title>
+    <meta name="description" content="Quickly find HSN (Goods) and SAC (Services) codes for GST compliance in India.">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VB6549D0LW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VB6549D0LW');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6687860250561653" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+<body class="bg-gray-50 text-gray-800">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fas fa-tools text-blue-500 text-xl"></i>
+                <span class="text-xl font-bold text-gray-800">WebTools Daily</span>
+            </a>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="tools.html" class="text-gray-600 hover:text-blue-500 transition-colors">All Tools</a>
+                <a href="blog.html" class="text-gray-600 hover:text-blue-500 transition-colors">Blog</a>
+                <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="text-orange-500 hover:text-orange-600 transition-colors flex items-center space-x-1">
+                    <i class="fas fa-coffee"></i>
+                    <span>Support Us</span>
+                </a>
+            </nav>
+            <button id="mobileMenuButton" class="md:hidden text-gray-600 hover:text-blue-500">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-4">HSN & SAC Code Finder Tool 🔍</h1>
+        <p class="text-lg text-gray-600 mb-8">Quickly find the correct HSN (Goods) and SAC (Services) codes for GST compliance. Search by code or product/service description.</p>
+
+        <div class="mb-8">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-6687860250561653"
+                 data-ad-slot="YOUR_AD_SLOT_ID_HERE"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <div class="bg-white shadow-lg rounded-xl p-6 mb-8">
+            <div class="mb-4">
+                <label for="searchInput" class="block text-sm font-medium text-gray-700 mb-2">Search HSN or SAC Code / Description:</label>
+                <input type="text" id="searchInput" placeholder="e.g., 8471 or Laptop or Software development" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-lg">
+            </div>
+
+            <div class="flex items-center space-x-4 mb-6">
+                <label class="flex items-center">
+                    <input type="radio" name="codeType" value="all" checked class="form-radio text-blue-600" onchange="searchCodes()">
+                    <span class="ml-2 text-gray-700">All Codes (HSN & SAC)</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" name="codeType" value="hsn" class="form-radio text-blue-600" onchange="searchCodes()">
+                    <span class="ml-2 text-gray-700">HSN (Goods)</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" name="codeType" value="sac" class="form-radio text-blue-600" onchange="searchCodes()">
+                    <span class="ml-2 text-gray-700">SAC (Services)</span>
+                </label>
+            </div>
+
+            <div id="resultsCount" class="text-sm text-gray-500 mb-4"></div>
+            
+            <div id="resultsContainer" class="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+                <div class="p-4 bg-gray-100 rounded-lg text-gray-600 text-center">Start typing to search for HSN or SAC codes.</div>
+            </div>
+
+        </div>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">What are HSN and SAC Codes?</h2>
+        <div class="space-y-4 text-gray-700">
+            <p>The **Harmonized System of Nomenclature (HSN)** is an internationally recognized classification system for goods. It is a six-digit code that classifies more than 5,000 commodities, and the extended Indian system uses **eight digits**. It helps in systematic classification for taxation (GST) and customs purposes.</p>
+            <p>The **Service Accounting Code (SAC)** is a classification system used in India for services under the GST regime. SAC codes are always **six digits** and help in consistent tax application across various types of services, such as construction, consulting, and IT services.</p>
+            <p class="font-semibold text-blue-600">Using the correct code is essential for accurate GST invoice generation and compliance.</p>
+        </div>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <div class="text-center md:text-left">
+                    <div class="flex items-center space-x-2 justify-center md:justify-start">
+                        <i class="fas fa-tools text-blue-500 text-xl"></i>
+                        <span class="text-xl font-bold">WebTools Daily</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2">Free online utilities for everyday tasks</p>
+                </div>
+                <div class="flex flex-wrap justify-center space-x-6 text-sm">
+                    <a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="affiliate.html" class="text-gray-400 hover:text-white transition-colors">Affiliate Disclosure</a>
+                    <a href="blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a>
+                    <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="text-orange-400 hover:text-orange-300 transition-colors flex items-center space-x-1">
+                        <i class="fas fa-coffee"></i>
+                        <span>Buy Me a Coffee</span>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 WebTools Daily. All rights reserved. | webtoolsdaily.com</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // ⚠️ IMPORTANT: In a real-world tool, this array would contain thousands of entries.
+        // I have included a few examples here for the search functionality to work.
+        const hsnSacData = [
+            { code: '8471', description: 'Automatic data processing machines (e.g., Laptops, computers)', type: 'HSN' },
+            { code: '998313', description: 'Software installation services', type: 'SAC' },
+            { code: '998314', description: 'Software design and development', type: 'SAC' },
+            { code: '8517', description: 'Telecommunication apparatus (e.g., Mobile phones)', type: 'HSN' },
+            { code: '3004', description: 'Medicaments (excluding certain goods)', type: 'HSN' },
+            { code: '995411', description: 'Construction services for general civil engineering', type: 'SAC' },
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const resultsCount = document.getElementById('resultsCount');
+
+        // Event listener to perform search as the user types
+        searchInput.addEventListener('input', searchCodes);
+
+        function searchCodes() {
+            const query = searchInput.value.toLowerCase().trim();
+            const selectedType = document.querySelector('input[name="codeType"]:checked').value;
+            
+            if (query.length < 2) {
+                resultsContainer.innerHTML = '<div class="p-4 bg-gray-100 rounded-lg text-gray-600 text-center">Start typing to search for HSN or SAC codes.</div>';
+                resultsCount.textContent = '';
+                return;
+            }
+
+            const filteredResults = hsnSacData.filter(item => {
+                const codeMatch = item.code.includes(query);
+                const descriptionMatch = item.description.toLowerCase().includes(query);
+                const typeMatch = selectedType === 'all' || item.type.toLowerCase() === selectedType;
+                
+                return (codeMatch || descriptionMatch) && typeMatch;
+            });
+
+            renderResults(filteredResults);
+        }
+
+        function renderResults(results) {
+            resultsCount.textContent = `Found ${results.length} results.`;
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<div class="p-4 bg-yellow-100 rounded-lg text-yellow-800 text-center">No codes found matching your query. Try a broader search term.</div>';
+                return;
+            }
+
+            results.forEach(item => {
+                const resultElement = document.createElement('div');
+                resultElement.className = 'p-4 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow';
+                resultElement.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="text-2xl font-bold ${item.type === 'HSN' ? 'text-green-600' : 'text-purple-600'}">${item.code}</span>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full ${item.type === 'HSN' ? 'bg-green-100 text-green-800' : 'bg-purple-100 text-purple-800'}">${item.type} Code</span>
+                    </div>
+                    <p class="mt-2 text-gray-700">${item.description}</p>
+                `;
+                resultsContainer.appendChild(resultElement);
+            });
+        }
+    </script>
+</body>
+</html>
