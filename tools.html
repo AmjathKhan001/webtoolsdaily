@@ -263,28 +263,181 @@
                 </div>
             </section>
 
-            <section id="unit-converter" class="py-12 border-b border-gray-200 tool-section">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center space-x-3">
-                    <i class="fas fa-calculator text-orange-500"></i>
-                    <span>Unit Converter (Temp)</span>
-                </h2>
-                <div class="bg-white rounded-xl shadow-lg p-6 max-w-lg mx-auto">
-                    <p class="text-gray-600 mb-4">Convert between Celsius and Fahrenheit.</p>
-                    <div class="space-y-4">
-                        <div>
-                            <label for="celsiusInput" class="block text-sm font-medium text-gray-700">Celsius (°C)</label>
-                            <input type="number" id="celsiusInput" oninput="convertTemperature('celsius')" placeholder="0" class="w-full p-3 border border-gray-300 rounded-lg mt-1">
-                        </div>
-                        <div class="text-center text-gray-500 font-bold">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <div>
-                            <label for="fahrenheitInput" class="block text-sm font-medium text-gray-700">Fahrenheit (°F)</label>
-                            <input type="number" id="fahrenheitInput" oninput="convertTemperature('fahrenheit')" placeholder="32" class="w-full p-3 border border-gray-300 rounded-lg mt-1">
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div id="unit-converter" class="max-w-xl mx-auto mb-16 px-4">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
+        <i class="fas fa-calculator text-blue-500"></i>
+        <span>Unit Converter</span>
+    </h2>
+    <p class="text-gray-600 mb-6">Convert between various units of measurement (Length, Weight, Temperature, etc.) instantly.</p>
+
+    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+        
+        <div class="mb-5">
+            <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Select Category</label>
+            <select id="category" onchange="resetConverter()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                <option value="length">Length</option>
+                <option value="weight">Weight</option>
+                <option value="temperature">Temperature</option>
+                <option value="volume">Volume</option>
+            </select>
+        </div>
+
+        <div class="mb-5">
+            <label for="inputValue" class="block text-sm font-medium text-gray-700 mb-2">Input Value</label>
+            <input type="number" id="inputValue" oninput="convertUnit()" placeholder="Enter value" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-lg">
+        </div>
+
+        <div class="mb-5 flex space-x-4">
+            <div class="w-1/2">
+                <label for="fromUnit" class="block text-sm font-medium text-gray-700 mb-2">From Unit</label>
+                <select id="fromUnit" onchange="convertUnit()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></select>
+            </div>
+            
+            <button onclick="swapUnits()" class="w-10 h-10 self-end mb-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors flex items-center justify-center" title="Swap Units">
+                <i class="fas fa-exchange-alt"></i>
+            </button>
+
+            <div class="w-1/2">
+                <label for="toUnit" class="block text-sm font-medium text-gray-700 mb-2">To Unit</label>
+                <select id="toUnit" onchange="convertUnit()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></select>
+            </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
+            <h4 class="text-lg font-semibold text-blue-800">Result</h4>
+            <p id="resultDisplay" class="text-2xl font-extrabold text-blue-900 mt-1">0.00</p>
+        </div>
+    </div>
+</div>
+<script>
+    // --- Start Unit Converter Logic ---
+    const CONVERSIONS = {
+        length: {
+            // Base unit: meter
+            meter: { toBase: 1, label: "Meter (m)" },
+            kilometer: { toBase: 1000, label: "Kilometer (km)" },
+            centimeter: { toBase: 0.01, label: "Centimeter (cm)" },
+            millimeter: { toBase: 0.001, label: "Millimeter (mm)" },
+            mile: { toBase: 1609.34, label: "Mile (mi)" },
+            yard: { toBase: 0.9144, label: "Yard (yd)" },
+            foot: { toBase: 0.3048, label: "Foot (ft)" },
+            inch: { toBase: 0.0254, label: "Inch (in)" },
+        },
+        weight: {
+            // Base unit: kilogram
+            kilogram: { toBase: 1, label: "Kilogram (kg)" },
+            gram: { toBase: 0.001, label: "Gram (g)" },
+            milligram: { toBase: 0.000001, label: "Milligram (mg)" },
+            tonne: { toBase: 1000, label: "Tonne (t)" },
+            pound: { toBase: 0.453592, label: "Pound (lb)" },
+            ounce: { toBase: 0.0283495, label: "Ounce (oz)" },
+        },
+        temperature: {
+            // Special conversion - no linear base unit. Formulas used directly in convertUnit()
+            celsius: { label: "Celsius (°C)" },
+            fahrenheit: { label: "Fahrenheit (°F)" },
+            kelvin: { label: "Kelvin (K)" },
+        },
+        volume: {
+            // Base unit: cubic meter
+            cubic_meter: { toBase: 1, label: "Cubic Meter (m³)" },
+            liter: { toBase: 0.001, label: "Liter (L)" },
+            milliliter: { toBase: 0.000001, label: "Milliliter (mL)" },
+            us_gallon: { toBase: 0.00378541, label: "US Gallon" },
+            us_quart: { toBase: 0.000946353, label: "US Quart" },
+        }
+    };
+
+    const categorySelect = document.getElementById('category');
+    const fromUnitSelect = document.getElementById('fromUnit');
+    const toUnitSelect = document.getElementById('toUnit');
+    const inputValue = document.getElementById('inputValue');
+    const resultDisplay = document.getElementById('resultDisplay');
+
+    function populateUnits(category) {
+        fromUnitSelect.innerHTML = '';
+        toUnitSelect.innerHTML = '';
+        const units = CONVERSIONS[category];
+
+        for (const unit in units) {
+            const label = units[unit].label;
+            const optionFrom = new Option(label, unit);
+            const optionTo = new Option(label, unit);
+            fromUnitSelect.add(optionFrom);
+            toUnitSelect.add(optionTo);
+        }
+    }
+
+    function resetConverter() {
+        const category = categorySelect.value;
+        populateUnits(category);
+        inputValue.value = '';
+        resultDisplay.textContent = '0.00';
+        // Set a default 'to' unit for temperature for better UX
+        if (category === 'temperature') {
+            fromUnitSelect.value = 'celsius';
+            toUnitSelect.value = 'fahrenheit';
+        }
+    }
+
+    function swapUnits() {
+        const temp = fromUnitSelect.value;
+        fromUnitSelect.value = toUnitSelect.value;
+        toUnitSelect.value = temp;
+        convertUnit();
+    }
+
+    function convertUnit() {
+        const category = categorySelect.value;
+        const value = parseFloat(inputValue.value);
+        const fromUnit = fromUnitSelect.value;
+        const toUnit = toUnitSelect.value;
+
+        if (isNaN(value) || !fromUnit || !toUnit || fromUnit === toUnit) {
+            resultDisplay.textContent = value.toFixed(2) || '0.00';
+            return;
+        }
+
+        let result;
+
+        if (category === 'temperature') {
+            // 1. Convert FROM unit to a temporary Celsius base
+            let tempC;
+            if (fromUnit === 'fahrenheit') {
+                tempC = (value - 32) * (5 / 9);
+            } else if (fromUnit === 'kelvin') {
+                tempC = value - 273.15;
+            } else { // celsius
+                tempC = value;
+            }
+
+            // 2. Convert from temporary Celsius base TO the desired unit
+            if (toUnit === 'fahrenheit') {
+                result = (tempC * (9 / 5)) + 32;
+            } else if (toUnit === 'kelvin') {
+                result = tempC + 273.15;
+            } else { // celsius
+                result = tempC;
+            }
+
+        } else {
+            // Linear conversions (Length, Weight, Volume)
+            const units = CONVERSIONS[category];
+            
+            // 1. Convert FROM unit to the category's base unit
+            const valueInBase = value * units[fromUnit].toBase;
+
+            // 2. Convert from base unit TO the target unit
+            result = valueInBase / units[toUnit].toBase;
+        }
+
+        resultDisplay.textContent = result.toFixed(5);
+    }
+
+    // Initialize the converter on page load
+    window.onload = resetConverter;
+    // --- End Unit Converter Logic ---
+</script>
 
             <section id="qr-generator" class="py-12 border-b border-gray-200 tool-section">
                 <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center space-x-3">
@@ -910,7 +1063,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
-                <p>&copy; 2024 WebTools Daily. All rights reserved. | webtoolsdaily.com</p>
+                <p>&copy; 2025 WebTools Daily. All rights reserved. | webtoolsdaily.com</p>
             </div>
         </div>
     </footer>
