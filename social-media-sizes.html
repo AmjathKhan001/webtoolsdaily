@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Image Size Guide - WebTools Daily</title>
+    <meta name="description" content="Find perfect image sizes for Facebook, Instagram, Twitter, LinkedIn, YouTube, and other social media platforms. Optimize your posts with correct dimensions.">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VB6549D0LW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VB6549D0LW');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6687860250561653" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .platform-card { transition: all 0.3s ease; }
+        .platform-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        .size-card { border-left: 4px solid; }
+        .size-card.profile { border-left-color: #3b82f6; }
+        .size-card.cover { border-left-color: #10b981; }
+        .size-card.post { border-left-color: #8b5cf6; }
+        .size-card.story { border-left-color: #f59e0b; }
+        .size-card.ad { border-left-color: #ef4444; }
+        .copy-btn { transition: all 0.2s ease; }
+        .copy-btn:hover { transform: scale(1.05); }
+        .copy-btn.copied { background-color: #10b981 !important; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fas fa-tools text-blue-500 text-xl"></i>
+                <h1 class="text-xl font-bold text-gray-800">WebTools Daily</h1>
+            </a>
+            <nav class="flex items-center space-x-4">
+                <a href="index.html" class="text-gray-600 hover:text-blue-500 transition-colors">Home</a>
+                <a href="tools.html" class="text-blue-500 font-semibold transition-colors">Tools</a>
+                <a href="blog.html" class="text-gray-600 hover:text-blue-500 transition-colors">Blog</a>
+                <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors flex items-center space-x-2">
+                    <i class="fas fa-heart"></i>
+                    <span>Support Us</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Social Media Image Size Guide 📱</h1>
+            <p class="text-lg text-gray-600 mb-8">Find the perfect image dimensions for all social media platforms. Updated for 2024.</p>
+
+            <div class="mb-8">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-6687860250561653"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <!-- Search and Filter Section -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <div class="mb-6">
+                    <label for="searchPlatform" class="block text-sm font-medium text-gray-700 mb-2">Search Platform</label>
+                    <input type="text" id="searchPlatform" placeholder="Type platform name (Facebook, Instagram, etc.)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Filter by Image Type</label>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterByType('all')" class="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors active">All Types</button>
+                        <button onclick="filterByType('profile')" class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">Profile Pictures</button>
+                        <button onclick="filterByType('cover')" class="px-4 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors">Cover Photos</button>
+                        <button onclick="filterByType('post')" class="px-4 py-2 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-colors">Posts</button>
+                        <button onclick="filterByType('story')" class="px-4 py-2 bg-yellow-50 text-yellow-600 rounded-lg hover:bg-yellow-100 transition-colors">Stories</button>
+                        <button onclick="filterByType('ad')" class="px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">Ads</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platforms Grid -->
+            <div id="platformsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Platforms will be dynamically inserted here -->
+            </div>
+
+            <!-- Tips Section -->
+            <div class="mt-12 bg-blue-50 rounded-xl p-6 border border-blue-200">
+                <h3 class="text-xl font-bold text-blue-800 mb-4">💡 Pro Tips for Social Media Images</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-blue-700 mb-2">Best Practices</h4>
+                        <ul class="space-y-2 text-blue-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Always use high-resolution images (min 72 DPI)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Use RGB color mode for digital platforms</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Keep file size under recommended limits</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-blue-700 mb-2">File Formats</h4>
+                        <ul class="space-y-2 text-blue-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-image text-blue-500 mt-1 mr-2"></i>
+                                <span><strong>JPG:</strong> Best for photographs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-image text-blue-500 mt-1 mr-2"></i>
+                                <span><strong>PNG:</strong> Best for logos & graphics with transparency</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-image text-blue-500 mt-1 mr-2"></i>
+                                <span><strong>WebP:</strong> Best for web (smaller file size)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Reference Table -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Quick Reference Table</h3>
+                <div class="overflow-x-auto bg-white rounded-lg shadow">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Platform</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profile Picture</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cover Photo</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post/Feed</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Facebook</td>
+                                <td class="px-6 py-4 whitespace-nowrap">180×180 px</td>
+                                <td class="px-6 py-4 whitespace-nowrap">820×312 px</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1200×630 px</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Instagram</td>
+                                <td class="px-6 py-4 whitespace-nowrap">320×320 px</td>
+                                <td class="px-6 py-4 whitespace-nowrap">-</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1080×1080 px</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Twitter</td>
+                                <td class="px-6 py-4 whitespace-nowrap">400×400 px</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1500×500 px</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1200×675 px</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">LinkedIn</td>
+                                <td class="px-6 py-4 whitespace-nowrap">400×400 px</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1584×396 px</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1200×627 px</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-10 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <div class="flex items-center justify-center md:justify-start space-x-2">
+                        <i class="fas fa-tools text-blue-400"></i>
+                        <span class="text-xl font-bold">WebTools Daily</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2">Free online utilities for everyday tasks</p>
+                </div>
+                <div class="flex flex-wrap justify-center space-x-6 text-sm">
+                    <a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="affiliate.html" class="text-gray-400 hover:text-white transition-colors">Affiliate Disclosure</a>
+                    <a href="blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a>
+                    <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="text-orange-400 hover:text-orange-300 transition-colors flex items-center space-x-1">
+                        <i class="fas fa-coffee"></i>
+                        <span>Buy Me a Coffee</span>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 WebTools Daily. All rights reserved. | webtoolsdaily.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Social Media Image Sizes Data
+        const socialMediaSizes = [
+            {
+                id: 'facebook',
+                name: 'Facebook',
+                icon: 'fab fa-facebook',
+                color: 'bg-blue-100',
+                textColor: 'text-blue-700',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Profile Picture',
+                        size: '180×180 px',
+                        aspect: '1:1',
+                        min: '180×180 px',
+                        max: '2048×2048 px',
+                        format: 'JPG, PNG',
+                        maxSize: '4 MB'
+                    },
+                    {
+                        type: 'cover',
+                        name: 'Cover Photo',
+                        size: '820×312 px',
+                        aspect: '2.63:1',
+                        min: '400×150 px',
+                        max: '2048×2048 px',
+                        format: 'JPG, PNG',
+                        maxSize: '100 KB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Feed Post',
+                        size: '1200×630 px',
+                        aspect: '1.91:1',
+                        min: '600×315 px',
+                        max: '2048×2048 px',
+                        format: 'JPG, PNG',
+                        maxSize: '4 MB'
+                    },
+                    {
+                        type: 'story',
+                        name: 'Story',
+                        size: '1080×1920 px',
+                        aspect: '9:16',
+                        min: '500×500 px',
+                        max: '1080×1920 px',
+                        format: 'JPG, PNG',
+                        maxSize: '4 MB'
+                    },
+                    {
+                        type: 'ad',
+                        name: 'Ad Image',
+                        size: '1200×628 px',
+                        aspect: '1.91:1',
+                        min: '600×600 px',
+                        max: '2048×2048 px',
+                        format: 'JPG, PNG',
+                        maxSize: '4 MB'
+                    }
+                ]
+            },
+            {
+                id: 'instagram',
+                name: 'Instagram',
+                icon: 'fab fa-instagram',
+                color: 'bg-pink-100',
+                textColor: 'text-pink-700',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Profile Picture',
+                        size: '320×320 px',
+                        aspect: '1:1',
+                        min: '110×110 px',
+                        max: '1080×1080 px',
+                        format: 'JPG, PNG',
+                        maxSize: '8 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Square Post',
+                        size: '1080×1080 px',
+                        aspect: '1:1',
+                        min: '600×600 px',
+                        max: '1080×1080 px',
+                        format: 'JPG, PNG',
+                        maxSize: '8 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Portrait Post',
+                        size: '1080×1350 px',
+                        aspect: '4:5',
+                        min: '600×750 px',
+                        max: '1080×1350 px',
+                        format: 'JPG, PNG',
+                        maxSize: '8 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Landscape Post',
+                        size: '1080×566 px',
+                        aspect: '1.91:1',
+                        min: '600×400 px',
+                        max: '1080×566 px',
+                        format: 'JPG, PNG',
+                        maxSize: '8 MB'
+                    },
+                    {
+                        type: 'story',
+                        name: 'Story',
+                        size: '1080×1920 px',
+                        aspect: '9:16',
+                        min: '600×1067 px',
+                        max: '1080×1920 px',
+                        format: 'JPG, PNG',
+                        maxSize: '4 GB'
+                    },
+                    {
+                        type: 'story',
+                        name: 'Reels',
+                        size: '1080×1920 px',
+                        aspect: '9:16',
+                        min: '500×500 px',
+                        max: '1080×1920 px',
+                        format: 'MP4, MOV',
+                        maxSize: '4 GB'
+                    }
+                ]
+            },
+            {
+                id: 'twitter',
+                name: 'Twitter / X',
+                icon: 'fab fa-twitter',
+                color: 'bg-black',
+                textColor: 'text-white',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Profile Picture',
+                        size: '400×400 px',
+                        aspect: '1:1',
+                        min: '400×400 px',
+                        max: '2048×2048 px',
+                        format: 'JPG, PNG, GIF',
+                        maxSize: '2 MB'
+                    },
+                    {
+                        type: 'cover',
+                        name: 'Header Photo',
+                        size: '1500×500 px',
+                        aspect: '3:1',
+                        min: '1500×500 px',
+                        max: '2048×2048 px',
+                        format: 'JPG, PNG, GIF',
+                        maxSize: '5 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Tweet Image',
+                        size: '1200×675 px',
+                        aspect: '16:9',
+                        min: '600×335 px',
+                        max: '2048×2048 px',
+                        format: 'JPG, PNG, GIF',
+                        maxSize: '5 MB'
+                    }
+                ]
+            },
+            {
+                id: 'linkedin',
+                name: 'LinkedIn',
+                icon: 'fab fa-linkedin',
+                color: 'bg-blue-200',
+                textColor: 'text-blue-800',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Profile Picture',
+                        size: '400×400 px',
+                        aspect: '1:1',
+                        min: '400×400 px',
+                        max: '7680×4320 px',
+                        format: 'JPG, PNG',
+                        maxSize: '8 MB'
+                    },
+                    {
+                        type: 'cover',
+                        name: 'Cover Photo',
+                        size: '1584×396 px',
+                        aspect: '4:1',
+                        min: '1192×220 px',
+                        max: '1584×396 px',
+                        format: 'JPG, PNG',
+                        maxSize: '8 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Company Logo',
+                        size: '300×300 px',
+                        aspect: '1:1',
+                        min: '300×300 px',
+                        max: '7680×4320 px',
+                        format: 'JPG, PNG',
+                        maxSize: '8 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Post Image',
+                        size: '1200×627 px',
+                        aspect: '1.91:1',
+                        min: '600×314 px',
+                        max: '7680×4320 px',
+                        format: 'JPG, PNG',
+                        maxSize: '8 MB'
+                    }
+                ]
+            },
+            {
+                id: 'youtube',
+                name: 'YouTube',
+                icon: 'fab fa-youtube',
+                color: 'bg-red-100',
+                textColor: 'text-red-700',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Channel Icon',
+                        size: '800×800 px',
+                        aspect: '1:1',
+                        min: '98×98 px',
+                        max: '800×800 px',
+                        format: 'JPG, PNG, GIF',
+                        maxSize: '4 MB'
+                    },
+                    {
+                        type: 'cover',
+                        name: 'Channel Art',
+                        size: '2560×1440 px',
+                        aspect: '16:9',
+                        min: '2048×1152 px',
+                        max: '2560×1440 px',
+                        format: 'JPG, PNG',
+                        maxSize: '6 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Thumbnail',
+                        size: '1280×720 px',
+                        aspect: '16:9',
+                        min: '640×360 px',
+                        max: '2048×1152 px',
+                        format: 'JPG, PNG, GIF',
+                        maxSize: '2 MB'
+                    }
+                ]
+            },
+            {
+                id: 'pinterest',
+                name: 'Pinterest',
+                icon: 'fab fa-pinterest',
+                color: 'bg-red-200',
+                textColor: 'text-red-800',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Profile Picture',
+                        size: '165×165 px',
+                        aspect: '1:1',
+                        min: '165×165 px',
+                        max: '10000×10000 px',
+                        format: 'JPG, PNG',
+                        maxSize: '10 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Pin Image',
+                        size: '1000×1500 px',
+                        aspect: '2:3',
+                        min: '600×900 px',
+                        max: '1000×1500 px',
+                        format: 'JPG, PNG',
+                        maxSize: '20 MB'
+                    }
+                ]
+            },
+            {
+                id: 'tiktok',
+                name: 'TikTok',
+                icon: 'fab fa-tiktok',
+                color: 'bg-black',
+                textColor: 'text-white',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Profile Picture',
+                        size: '200×200 px',
+                        aspect: '1:1',
+                        min: '200×200 px',
+                        max: '200×200 px',
+                        format: 'JPG, PNG',
+                        maxSize: '2 MB'
+                    },
+                    {
+                        type: 'post',
+                        name: 'Video',
+                        size: '1080×1920 px',
+                        aspect: '9:16',
+                        min: '720×1280 px',
+                        max: '1080×1920 px',
+                        format: 'MP4, MOV',
+                        maxSize: '287.6 MB'
+                    },
+                    {
+                        type: 'cover',
+                        name: 'Video Cover',
+                        size: '1080×1920 px',
+                        aspect: '9:16',
+                        min: '720×1280 px',
+                        max: '1080×1920 px',
+                        format: 'JPG, PNG',
+                        maxSize: '2 MB'
+                    }
+                ]
+            },
+            {
+                id: 'whatsapp',
+                name: 'WhatsApp',
+                icon: 'fab fa-whatsapp',
+                color: 'bg-green-100',
+                textColor: 'text-green-700',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Profile Picture',
+                        size: '500×500 px',
+                        aspect: '1:1',
+                        min: '192×192 px',
+                        max: '500×500 px',
+                        format: 'JPG, PNG',
+                        maxSize: '64 KB'
+                    },
+                    {
+                        type: 'story',
+                        name: 'Status',
+                        size: '1080×1920 px',
+                        aspect: '9:16',
+                        min: '720×1280 px',
+                        max: '1080×1920 px',
+                        format: 'JPG, PNG',
+                        maxSize: '16 MB'
+                    }
+                ]
+            },
+            {
+                id: 'snapchat',
+                name: 'Snapchat',
+                icon: 'fab fa-snapchat',
+                color: 'bg-yellow-100',
+                textColor: 'text-yellow-800',
+                sizes: [
+                    {
+                        type: 'profile',
+                        name: 'Snapcode',
+                        size: '1080×1080 px',
+                        aspect: '1:1',
+                        min: '1080×1080 px',
+                        max: '1080×1080 px',
+                        format: 'PNG',
+                        maxSize: '5 MB'
+                    },
+                    {
+                        type: 'story',
+                        name: 'Snap',
+                        size: '1080×1920 px',
+                        aspect: '9:16',
+                        min: '1080×1920 px',
+                        max: '1080×1920 px',
+                        format: 'MP4, JPG, PNG',
+                        maxSize: '32 MB'
+                    }
+                ]
+            }
+        ];
+
+        // DOM Elements
+        const platformsContainer = document.getElementById('platformsContainer');
+        const searchInput = document.getElementById('searchPlatform');
+        let currentFilter = 'all';
+
+        // Initialize platforms
+        function initializePlatforms() {
+            renderPlatforms(socialMediaSizes);
+        }
+
+        // Render platforms
+        function renderPlatforms(platforms) {
+            platformsContainer.innerHTML = '';
+            
+            platforms.forEach(platform => {
+                const platformCard = document.createElement('div');
+                platformCard.className = 'platform-card bg-white rounded-xl shadow-lg overflow-hidden';
+                platformCard.innerHTML = `
+                    <div class="${platform.color} ${platform.textColor} p-4 flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i class="${platform.icon} text-2xl"></i>
+                            <h3 class="text-xl font-bold">${platform.name}</h3>
+                        </div>
+                        <span class="text-sm font-semibold bg-white bg-opacity-30 px-3 py-1 rounded-full">
+                            ${platform.sizes.length} sizes
+                        </span>
+                    </div>
+                    <div class="p-4">
+                        <div id="sizes-${platform.id}" class="space-y-3">
+                            ${renderSizeCards(platform.sizes)}
+                        </div>
+                    </div>
+                `;
+                platformsContainer.appendChild(platformCard);
+            });
+        }
+
+        // Render size cards for a platform
+        function renderSizeCards(sizes) {
+            const filteredSizes = currentFilter === 'all' 
+                ? sizes 
+                : sizes.filter(size => size.type === currentFilter);
+            
+            if (filteredSizes.length === 0) {
+                return `<div class="text-center py-4 text-gray-500">No ${currentFilter} sizes found for this platform.</div>`;
+            }
+
+            return filteredSizes.map(size => `
+                <div class="size-card ${size.type} bg-gray-50 rounded-lg p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">${size.name}</h4>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <span class="text-2xl font-bold text-gray-900">${size.size}</span>
+                                <span class="text-sm text-gray-600">${size.aspect}</span>
+                            </div>
+                        </div>
+                        <button onclick="copySize('${size.size}')" class="copy-btn bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-sm text-gray-600">
+                        <div><span class="font-medium">Min:</span> ${size.min}</div>
+                        <div><span class="font-medium">Format:</span> ${size.format}</div>
+                        <div><span class="font-medium">Max Size:</span> ${size.maxSize}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter platforms by search
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                renderPlatforms(socialMediaSizes);
+                return;
+            }
+
+            const filteredPlatforms = socialMediaSizes.filter(platform =>
+                platform.name.toLowerCase().includes(searchTerm) ||
+                platform.id.toLowerCase().includes(searchTerm)
+            );
+
+            renderPlatforms(filteredPlatforms);
+        });
+
+        // Filter by type
+        function filterByType(type) {
+            currentFilter = type;
+            
+            // Update active button
+            document.querySelectorAll('.bg-blue-100').forEach(btn => btn.classList.remove('active', 'bg-blue-100', 'text-blue-700'));
+            document.querySelectorAll('.bg-blue-50').forEach(btn => btn.classList.remove('bg-blue-50'));
+            document.querySelectorAll('.bg-green-50').forEach(btn => btn.classList.remove('bg-green-50'));
+            document.querySelectorAll('.bg-purple-50').forEach(btn => btn.classList.remove('bg-purple-50'));
+            document.querySelectorAll('.bg-yellow-50').forEach(btn => btn.classList.remove('bg-yellow-50'));
+            document.querySelectorAll('.bg-red-50').forEach(btn => btn.classList.remove('bg-red-50'));
+            
+            event.target.classList.add('active', 'bg-blue-100', 'text-blue-700');
+            
+            // Re-render all platforms with filtered sizes
+            socialMediaSizes.forEach(platform => {
+                const sizesContainer = document.getElementById(`sizes-${platform.id}`);
+                if (sizesContainer) {
+                    sizesContainer.innerHTML = renderSizeCards(platform.sizes);
+                }
+            });
+        }
+
+        // Copy size to clipboard
+        function copySize(size) {
+            navigator.clipboard.writeText(size).then(() => {
+                const btn = event.target.closest('button');
+                btn.classList.add('copied');
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<i class="fas fa-copy"></i>';
+                }, 2000);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializePlatforms);
+
+        // Track page view
+        gtag('event', 'page_view', {
+            page_title: 'Social Media Image Sizes - WebTools Daily',
+            page_location: 'https://webtoolsdaily.com/social-media-sizes.html'
+        });
+    </script>
+</body>
+</html>
