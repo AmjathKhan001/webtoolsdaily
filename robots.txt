@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.webtoolsdaily.com/sitemap.xml
+
+Disallow: /private/
+Disallow: /admin/
