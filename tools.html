@@ -26,6 +26,7 @@
         .tool-grid-item:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
         .tool-section:last-of-type { border-bottom: none; }
         .error-border { border-color: #ef4444; }
+        .code-block { font-family: 'Courier New', Courier, monospace; background-color: #f7f7f7; padding: 8px; border-radius: 4px; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -55,7 +56,6 @@
             </p>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 mb-12" id="toolsGrid">
-    
                 <a href="index.html" class="bg-white p-6 rounded-lg text-center tool-grid-item hover:shadow-lg border-2 border-transparent hover:border-blue-500">
                     <i class="fas fa-image text-blue-500 text-2xl mb-3"></i>
                     <h3 class="font-semibold text-gray-800">Image Converter</h3>
@@ -294,7 +294,7 @@
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label for="jsonInput" class="block text-sm font-medium text-gray-700">JSON Input</label>
-                            <textarea id="jsonInput" rows="10" placeholder="{&quot;key&quot;:&quot;value&quot;}" class="w-full p-3 border border-gray-300 rounded-lg mt-1 font-mono text-sm"></textarea>
+                            <textarea id="jsonInput" rows="10" placeholder='{"key":"value"}' class="w-full p-3 border border-gray-300 rounded-lg mt-1 font-mono text-sm"></textarea>
                         </div>
                         <div>
                             <label for="jsonOutput" class="block text-sm font-medium text-gray-700">Formatted JSON</label>
@@ -326,7 +326,6 @@
                     <p class="text-gray-600 mb-6">Convert between various units of measurement (Length, Weight, Temperature, etc.) instantly.</p>
 
                     <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                        
                         <div class="mb-5">
                             <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Select Category</label>
                             <select id="category" onchange="resetConverter()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
@@ -364,135 +363,6 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    // --- Start Unit Converter Logic ---
-                    const CONVERSIONS = {
-                        length: {
-                            // Base unit: meter
-                            meter: { toBase: 1, label: "Meter (m)" },
-                            kilometer: { toBase: 1000, label: "Kilometer (km)" },
-                            centimeter: { toBase: 0.01, label: "Centimeter (cm)" },
-                            millimeter: { toBase: 0.001, label: "Millimeter (mm)" },
-                            mile: { toBase: 1609.34, label: "Mile (mi)" },
-                            yard: { toBase: 0.9144, label: "Yard (yd)" },
-                            foot: { toBase: 0.3048, label: "Foot (ft)" },
-                            inch: { toBase: 0.0254, label: "Inch (in)" },
-                        },
-                        weight: {
-                            // Base unit: kilogram
-                            kilogram: { toBase: 1, label: "Kilogram (kg)" },
-                            gram: { toBase: 0.001, label: "Gram (g)" },
-                            milligram: { toBase: 0.000001, label: "Milligram (mg)" },
-                            tonne: { toBase: 1000, label: "Tonne (t)" },
-                            pound: { toBase: 0.453592, label: "Pound (lb)" },
-                            ounce: { toBase: 0.0283495, label: "Ounce (oz)" },
-                        },
-                        temperature: {
-                            // Special conversion - no linear base unit. Formulas used directly in convertUnit()
-                            celsius: { label: "Celsius (°C)" },
-                            fahrenheit: { label: "Fahrenheit (°F)" },
-                            kelvin: { label: "Kelvin (K)" },
-                        },
-                        volume: {
-                            // Base unit: cubic meter
-                            cubic_meter: { toBase: 1, label: "Cubic Meter (m³)" },
-                            liter: { toBase: 0.001, label: "Liter (L)" },
-                            milliliter: { toBase: 0.000001, label: "Milliliter (mL)" },
-                            us_gallon: { toBase: 0.00378541, label: "US Gallon" },
-                            us_quart: { toBase: 0.000946353, label: "US Quart" },
-                        }
-                    };
-
-                    const categorySelect = document.getElementById('category');
-                    const fromUnitSelect = document.getElementById('fromUnit');
-                    const toUnitSelect = document.getElementById('toUnit');
-                    const inputValue = document.getElementById('inputValue');
-                    const resultDisplay = document.getElementById('resultDisplay');
-
-                    function populateUnits(category) {
-                        fromUnitSelect.innerHTML = '';
-                        toUnitSelect.innerHTML = '';
-                        const units = CONVERSIONS[category];
-
-                        for (const unit in units) {
-                            const label = units[unit].label;
-                            const optionFrom = new Option(label, unit);
-                            const optionTo = new Option(label, unit);
-                            fromUnitSelect.add(optionFrom);
-                            toUnitSelect.add(optionTo);
-                        }
-                    }
-
-                    function resetConverter() {
-                        const category = categorySelect.value;
-                        populateUnits(category);
-                        inputValue.value = '';
-                        resultDisplay.textContent = '0.00';
-                        // Set a default 'to' unit for temperature for better UX
-                        if (category === 'temperature') {
-                            fromUnitSelect.value = 'celsius';
-                            toUnitSelect.value = 'fahrenheit';
-                        }
-                    }
-
-                    function swapUnits() {
-                        const temp = fromUnitSelect.value;
-                        fromUnitSelect.value = toUnitSelect.value;
-                        toUnitSelect.value = temp;
-                        convertUnit();
-                    }
-
-                    function convertUnit() {
-                        const category = categorySelect.value;
-                        const value = parseFloat(inputValue.value);
-                        const fromUnit = fromUnitSelect.value;
-                        const toUnit = toUnitSelect.value;
-
-                        if (isNaN(value) || !fromUnit || !toUnit || fromUnit === toUnit) {
-                            resultDisplay.textContent = value.toFixed(2) || '0.00';
-                            return;
-                        }
-
-                        let result;
-
-                        if (category === 'temperature') {
-                            // 1. Convert FROM unit to a temporary Celsius base
-                            let tempC;
-                            if (fromUnit === 'fahrenheit') {
-                                tempC = (value - 32) * (5 / 9);
-                            } else if (fromUnit === 'kelvin') {
-                                tempC = value - 273.15;
-                            } else { // celsius
-                                tempC = value;
-                            }
-
-                            // 2. Convert from temporary Celsius base TO the desired unit
-                            if (toUnit === 'fahrenheit') {
-                                result = (tempC * (9 / 5)) + 32;
-                            } else if (toUnit === 'kelvin') {
-                                result = tempC + 273.15;
-                            } else { // celsius
-                                result = tempC;
-                            }
-
-                        } else {
-                            // Linear conversions (Length, Weight, Volume)
-                            const units = CONVERSIONS[category];
-                            
-                            // 1. Convert FROM unit to the category's base unit
-                            const valueInBase = value * units[fromUnit].toBase;
-
-                            // 2. Convert from base unit TO the target unit
-                            result = valueInBase / units[toUnit].toBase;
-                        }
-
-                        resultDisplay.textContent = result.toFixed(5);
-                    }
-
-                    // Initialize the converter on page load
-                    window.onload = resetConverter;
-                    // --- End Unit Converter Logic ---
-                </script>
             </section>
 
             <!-- QR Generator Section -->
@@ -534,7 +404,8 @@
                         </button>
                     </div>
                     <ul id="todoList" class="space-y-2">
-                        </ul>
+                        <!-- Todos will be dynamically added here -->
+                    </ul>
                 </div>
             </section>
 
@@ -789,47 +660,6 @@
                         <textarea id="regexOutput" rows="4" readonly placeholder="Matches will appear here..." class="w-full p-3 border border-gray-300 rounded-lg mt-1 bg-gray-50 font-mono text-sm"></textarea>
                     </div>
                 </div>
-                <script>
-                    function testRegex() {
-                        const pattern = document.getElementById('regexPattern').value;
-                        const flags = document.getElementById('regexFlags').value.toLowerCase().replace(/[^gimuy]/g, ''); // Sanitize flags
-                        const input = document.getElementById('regexInput').value;
-                        const output = document.getElementById('regexOutput');
-                        output.value = '';
-
-                        if (pattern.trim() === '') {
-                            return;
-                        }
-
-                        try {
-                            const regex = new RegExp(pattern, flags);
-                            let matches = [];
-
-                            if (flags.includes('g')) {
-                                // Global match: use exec in a loop
-                                let match;
-                                while ((match = regex.exec(input)) !== null) {
-                                    matches.push(match[0]);
-                                }
-                            } else {
-                                // Non-global match: only the first match
-                                const match = input.match(regex);
-                                if (match) {
-                                    matches.push(match[0]);
-                                }
-                            }
-
-                            if (matches.length > 0) {
-                                output.value = matches.join('\n');
-                            } else {
-                                output.value = 'No matches found.';
-                            }
-
-                        } catch (e) {
-                            output.value = 'Error: Invalid Regular Expression.';
-                        }
-                    }
-                </script>
             </section>
 
             <!-- CSV to JSON Section -->
@@ -859,69 +689,6 @@
                         </button>
                     </div>
                 </div>
-                <script>
-                    function convertCsvToJson() {
-                        const csv = document.getElementById('csvInput').value.trim();
-                        const output = document.getElementById('jsonOutputC');
-                        output.classList.remove('error-border');
-
-                        if (csv === '') {
-                            output.value = '';
-                            return;
-                        }
-
-                        try {
-                            const lines = csv.split('\n');
-                            if (lines.length === 0 || lines[0].trim() === '') {
-                                output.value = 'Error: No header row found.';
-                                output.classList.add('error-border');
-                                return;
-                            }
-                            
-                            // Simple split by comma for headers and data, assumes no escaped commas
-                            const headers = lines[0].split(',').map(h => h.trim());
-                            const result = [];
-
-                            for (let i = 1; i < lines.length; i++) {
-                                const line = lines[i].trim();
-                                if (line === '') continue; // Skip empty lines after the header
-                                
-                                const obj = {};
-                                const currentLine = line.split(',');
-
-                                if (currentLine.length !== headers.length) {
-                                    output.value = `Error: Line ${i + 1} has ${currentLine.length} columns, expected ${headers.length}.`;
-                                    output.classList.add('error-border');
-                                    return;
-                                }
-
-                                for (let j = 0; j < headers.length; j++) {
-                                    // Attempt to parse numbers, otherwise keep as string
-                                    const value = currentLine[j].trim();
-                                    obj[headers[j]] = isNaN(Number(value)) || value === '' ? value : Number(value);
-                                }
-                                result.push(obj);
-                            }
-
-                            output.value = JSON.stringify(result, null, 2);
-
-                        } catch (e) {
-                            output.value = 'Error: Could not process CSV data.';
-                            output.classList.add('error-border');
-                        }
-                    }
-                    function copyJsonCOutput() {
-                        const output = document.getElementById('jsonOutputC');
-                        if (output.value) {
-                            navigator.clipboard.writeText(output.value);
-                            const btn = document.getElementById('jsonCCopyBtn');
-                            btn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
-                            setTimeout(() => {
-                                btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-                            }, 2000);
-                        }
-                    }
-                </script>
             </section>
 
             <!-- Base Converter Section -->
@@ -947,48 +714,6 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    function convertBase(source) {
-                        const decInput = document.getElementById('decimalInput');
-                        const hexInput = document.getElementById('hexInputB');
-                        const binInput = document.getElementById('binaryInput');
-                        let decValue = NaN;
-
-                        // Clear all error classes
-                        [decInput, hexInput, binInput].forEach(input => input.classList.remove('error-border'));
-
-                        try {
-                            if (source === 'dec') {
-                                decValue = parseInt(decInput.value.trim(), 10);
-                            } else if (source === 'hex') {
-                                decValue = parseInt(hexInput.value.trim(), 16);
-                            } else if (source === 'bin') {
-                                decValue = parseInt(binInput.value.trim(), 2);
-                            }
-
-                            if (isNaN(decValue) || decValue < 0 || (source === 'bin' && /[^01]/.test(binInput.value.trim()))) {
-                                if (source === 'dec') decInput.classList.add('error-border');
-                                if (source === 'hex') hexInput.classList.add('error-border');
-                                if (source === 'bin') binInput.classList.add('error-border');
-                                
-                                // Clear other fields to show error
-                                if (source !== 'dec') decInput.value = '';
-                                if (source !== 'hex') hexInput.value = '';
-                                if (source !== 'bin') binInput.value = '';
-                                return;
-                            }
-
-                            // Convert and update other fields
-                            if (source !== 'dec') decInput.value = decValue.toString(10);
-                            if (source !== 'hex') hexInput.value = decValue.toString(16).toUpperCase();
-                            if (source !== 'bin') binInput.value = decValue.toString(2);
-
-                        } catch (e) {
-                            // Should be caught by isNaN check, but as a fallback
-                            alert('Invalid input.');
-                        }
-                    }
-                </script>
             </section>
 
             <!-- Slug Generator Section -->
@@ -1016,46 +741,6 @@
                         </button>
                     </div>
                 </div>
-                <script>
-                    function generateSlug() {
-                        const title = document.getElementById('titleInput').value;
-                        const output = document.getElementById('slugOutput');
-
-                        if (title.trim() === '') {
-                            output.value = '';
-                            return;
-                        }
-
-                        // 1. Convert to lowercase
-                        let slug = title.toLowerCase();
-
-                        // 2. Remove all non-alphanumeric characters except spaces and hyphens
-                        slug = slug.replace(/[^a-z0-9\s-]/g, '');
-
-                        // 3. Replace all white spaces (including tabs, new lines) with a single hyphen
-                        slug = slug.replace(/\s+/g, '-');
-
-                        // 4. Replace multiple hyphens with a single hyphen
-                        slug = slug.replace(/-+/g, '-');
-
-                        // 5. Trim hyphens from start and end
-                        slug = slug.replace(/^-+|-+$/g, '');
-
-                        output.value = slug;
-                    }
-
-                    function copySlugOutput() {
-                        const output = document.getElementById('slugOutput');
-                        if (output.value) {
-                            navigator.clipboard.writeText(output.value);
-                            const btn = document.getElementById('slugCopyBtn');
-                            btn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
-                            setTimeout(() => {
-                                btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-                            }, 2000);
-                        }
-                    }
-                </script>
             </section>
 
             <!-- Line Sorter Section -->
@@ -1079,34 +764,6 @@
                         </button>
                     </div>
                 </div>
-                <script>
-                    function sortItems(direction) {
-                        const input = document.getElementById('sortInput');
-                        let lines = input.value.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-                        
-                        if (lines.length === 0) return;
-
-                        // Attempt a numeric sort if all lines appear to be numbers
-                        const isNumeric = lines.every(line => !isNaN(parseFloat(line)) && isFinite(line));
-
-                        if (isNumeric) {
-                            lines.sort((a, b) => {
-                                const numA = parseFloat(a);
-                                const numB = parseFloat(b);
-                                return direction === 'asc' ? numA - numB : numB - numA;
-                            });
-                        } else {
-                            // Perform a standard alphabetical sort
-                            lines.sort((a, b) => {
-                                if (a < b) return direction === 'asc' ? -1 : 1;
-                                if (a > b) return direction === 'asc' ? 1 : -1;
-                                return 0;
-                            });
-                        }
-
-                        input.value = lines.join('\n');
-                    }
-                </script>
             </section>
 
             <!-- Explore More Specialized Tools Section -->
@@ -1247,18 +904,30 @@
     </footer>
 
     <script>
-        // --- Password Generator Functions ---
+        // ==================== PAGE INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
-            // Initial password generation on load if the tool is visible
+            // Initial password generation
             if (document.getElementById('password-generator')) generatePassword();
+            
             // Initial QR Code generation
             if (document.getElementById('qrInput')) generateQrCode();
+            
             // Initial Color conversion
             if (document.getElementById('hexInput')) convertColor('hex');
+            
             // Initial Word count
             if (document.getElementById('counterInput')) countText();
+            
             // Load To-Do List
             if (document.getElementById('todoList')) loadTodos();
+            
+            // Initialize Unit Converter
+            if (document.getElementById('category')) {
+                setTimeout(() => {
+                    resetConverter();
+                }, 100);
+            }
+            
             // Track page view
             gtag('event', 'page_view', {
                 page_title: 'All Web Tools - WebTools Daily',
@@ -1266,6 +935,7 @@
             });
         });
 
+        // ==================== PASSWORD GENERATOR ====================
         function generatePassword() {
             const length = parseInt(document.getElementById('passwordLength').value);
             const includeUppercase = document.getElementById('includeUppercase').checked;
@@ -1328,7 +998,7 @@
             }
         }
 
-        // --- JSON Formatter Functions ---
+        // ==================== JSON FORMATTER ====================
         function formatJson(mode) {
             const input = document.getElementById('jsonInput').value;
             const output = document.getElementById('jsonOutput');
@@ -1368,7 +1038,127 @@
             }
         }
 
-        // --- QR Code Generator Functions ---
+        // ==================== UNIT CONVERTER ====================
+        const CONVERSIONS = {
+            length: {
+                meter: { toBase: 1, label: "Meter (m)" },
+                kilometer: { toBase: 1000, label: "Kilometer (km)" },
+                centimeter: { toBase: 0.01, label: "Centimeter (cm)" },
+                millimeter: { toBase: 0.001, label: "Millimeter (mm)" },
+                mile: { toBase: 1609.34, label: "Mile (mi)" },
+                yard: { toBase: 0.9144, label: "Yard (yd)" },
+                foot: { toBase: 0.3048, label: "Foot (ft)" },
+                inch: { toBase: 0.0254, label: "Inch (in)" },
+            },
+            weight: {
+                kilogram: { toBase: 1, label: "Kilogram (kg)" },
+                gram: { toBase: 0.001, label: "Gram (g)" },
+                milligram: { toBase: 0.000001, label: "Milligram (mg)" },
+                tonne: { toBase: 1000, label: "Tonne (t)" },
+                pound: { toBase: 0.453592, label: "Pound (lb)" },
+                ounce: { toBase: 0.0283495, label: "Ounce (oz)" },
+            },
+            temperature: {
+                celsius: { label: "Celsius (°C)" },
+                fahrenheit: { label: "Fahrenheit (°F)" },
+                kelvin: { label: "Kelvin (K)" },
+            },
+            volume: {
+                cubic_meter: { toBase: 1, label: "Cubic Meter (m³)" },
+                liter: { toBase: 0.001, label: "Liter (L)" },
+                milliliter: { toBase: 0.000001, label: "Milliliter (mL)" },
+                us_gallon: { toBase: 0.00378541, label: "US Gallon" },
+                us_quart: { toBase: 0.000946353, label: "US Quart" },
+            }
+        };
+
+        function populateUnits(category) {
+            const fromUnitSelect = document.getElementById('fromUnit');
+            const toUnitSelect = document.getElementById('toUnit');
+            fromUnitSelect.innerHTML = '';
+            toUnitSelect.innerHTML = '';
+            const units = CONVERSIONS[category];
+
+            for (const unit in units) {
+                const label = units[unit].label;
+                const optionFrom = new Option(label, unit);
+                const optionTo = new Option(label, unit);
+                fromUnitSelect.add(optionFrom);
+                toUnitSelect.add(optionTo);
+            }
+        }
+
+        function resetConverter() {
+            const category = document.getElementById('category').value;
+            populateUnits(category);
+            document.getElementById('inputValue').value = '';
+            document.getElementById('resultDisplay').textContent = '0.00';
+            
+            // Set a default 'to' unit for temperature for better UX
+            if (category === 'temperature') {
+                document.getElementById('fromUnit').value = 'celsius';
+                document.getElementById('toUnit').value = 'fahrenheit';
+            }
+        }
+
+        function swapUnits() {
+            const fromUnitSelect = document.getElementById('fromUnit');
+            const toUnitSelect = document.getElementById('toUnit');
+            const temp = fromUnitSelect.value;
+            fromUnitSelect.value = toUnitSelect.value;
+            toUnitSelect.value = temp;
+            convertUnit();
+        }
+
+        function convertUnit() {
+            const category = document.getElementById('category').value;
+            const value = parseFloat(document.getElementById('inputValue').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            const resultDisplay = document.getElementById('resultDisplay');
+
+            if (isNaN(value) || !fromUnit || !toUnit || fromUnit === toUnit) {
+                resultDisplay.textContent = value.toFixed(2) || '0.00';
+                return;
+            }
+
+            let result;
+
+            if (category === 'temperature') {
+                // 1. Convert FROM unit to a temporary Celsius base
+                let tempC;
+                if (fromUnit === 'fahrenheit') {
+                    tempC = (value - 32) * (5 / 9);
+                } else if (fromUnit === 'kelvin') {
+                    tempC = value - 273.15;
+                } else { // celsius
+                    tempC = value;
+                }
+
+                // 2. Convert from temporary Celsius base TO the desired unit
+                if (toUnit === 'fahrenheit') {
+                    result = (tempC * (9 / 5)) + 32;
+                } else if (toUnit === 'kelvin') {
+                    result = tempC + 273.15;
+                } else { // celsius
+                    result = tempC;
+                }
+
+            } else {
+                // Linear conversions (Length, Weight, Volume)
+                const units = CONVERSIONS[category];
+                
+                // 1. Convert FROM unit to the category's base unit
+                const valueInBase = value * units[fromUnit].toBase;
+
+                // 2. Convert from base unit TO the target unit
+                result = valueInBase / units[toUnit].toBase;
+            }
+
+            resultDisplay.textContent = result.toFixed(5);
+        }
+
+        // ==================== QR CODE GENERATOR ====================
         function generateQrCode() {
             const text = document.getElementById('qrInput').value || 'https://webtoolsdaily.com';
             const canvas = document.getElementById('qrCanvas');
@@ -1378,8 +1168,8 @@
                 margin: 2,
                 width: 200,
                 color: {
-                    dark: '#1f2937', // Tailwind gray-800
-                    light: '#ffffff' // White
+                    dark: '#1f2937',
+                    light: '#ffffff'
                 }
             }, function (error) {
                 if (error) console.error(error);
@@ -1398,7 +1188,7 @@
             }
         }
 
-        // --- Local To-Do List Functions ---
+        // ==================== TO-DO LIST ====================
         let todos = [];
 
         function saveTodos() {
@@ -1441,7 +1231,7 @@
 
         function renderTodos() {
             const list = document.getElementById('todoList');
-            if (!list) return; // Prevent error if element is not on page
+            if (!list) return;
             list.innerHTML = '';
 
             todos.forEach((todo, index) => {
@@ -1460,7 +1250,7 @@
             });
         }
 
-        // --- Color Converter Functions ---
+        // ==================== COLOR CONVERTER ====================
         function hexToRgb(hex) {
             const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
             hex = hex.replace(shorthandRegex, function(m, r, g, b) {
@@ -1528,7 +1318,7 @@
             }
         }
 
-        // --- Word Counter Functions ---
+        // ==================== WORD COUNTER ====================
         function countText() {
             const input = document.getElementById('counterInput').value;
             
@@ -1545,11 +1335,10 @@
             
             // Line Count
             const lines = input.split('\n');
-            // Account for an empty textarea which should show 1 line
             document.getElementById('lineCount').textContent = input.length > 0 ? lines.length : 1;
         }
 
-        // --- Base64 Converter Functions ---
+        // ==================== BASE64 CONVERTER ====================
         function encodeBase64() {
             const input = document.getElementById('b64Input').value;
             const output = document.getElementById('b64Output');
@@ -1583,7 +1372,7 @@
             document.getElementById('b64Output').value = '';
         }
 
-        // --- Case Converter Functions ---
+        // ==================== CASE CONVERTER ====================
         function changeCase(type) {
             const inputElement = document.getElementById('caseInput');
             let text = inputElement.value;
@@ -1609,7 +1398,7 @@
             inputElement.value = text;
         }
         
-        // --- HTML Converter Functions ---
+        // ==================== HTML CONVERTER ====================
         function encodeHtml() {
             const input = document.getElementById('htmlInput').value;
             const output = document.getElementById('htmlOutput');
@@ -1645,7 +1434,7 @@
             document.getElementById('htmlOutput').value = '';
         }
 
-        // --- UUID Generator Functions ---
+        // ==================== UUID GENERATOR ====================
         function uuidv4() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -1663,19 +1452,18 @@
             output.value = uuids.join('\n');
         }
 
-        // --- MD5 Hash Generator Functions ---
+        // ==================== MD5 GENERATOR ====================
         function generateMd5() {
             const input = document.getElementById('md5Input').value;
             const output = document.getElementById('md5Output');
             if (input.trim() === '') {
                 output.value = '';
             } else {
-                // CryptoJS is loaded via CDN in <head>
                 output.value = CryptoJS.MD5(input).toString();
             }
         }
 
-        // --- CSS Formatter Functions (Placeholder/Mock) ---
+        // ==================== CSS FORMATTER ====================
         function formatCss(mode) {
             const input = document.getElementById('cssInput').value.trim();
             const output = document.getElementById('cssOutput');
@@ -1689,19 +1477,23 @@
             }
 
             try {
-                // Very basic formatting logic for demonstration
-                let processed = input.replace(/;\s*/g, ';\n'); // Newline after semicolon
-                processed = processed.replace(/\{/g, ' {\n'); // Newline before open brace
-                processed = processed.replace(/\}/g, '\n}\n'); // Newline after close brace
-                processed = processed.replace(/\n\n+/g, '\n'); // Collapse multiple newlines
-                processed = processed.trim();
-
+                let processed = input;
                 if (mode === 'beautify') {
-                    output.value = processed;
+                    // Basic beautification
+                    processed = processed.replace(/\{/g, ' {\n  ');
+                    processed = processed.replace(/;/g, ';\n  ');
+                    processed = processed.replace(/\}/g, '\n}\n');
+                    processed = processed.replace(/\n\s*\n/g, '\n');
                 } else {
-                    // Basic Minify: remove all whitespace/newlines
-                    output.value = input.replace(/\s+/g, '').replace(/\/\*.*?\*\//g, '');
+                    // Basic minification
+                    processed = processed.replace(/\s+/g, ' ');
+                    processed = processed.replace(/\s*\{\s*/g, '{');
+                    processed = processed.replace(/\s*\}\s*/g, '}');
+                    processed = processed.replace(/\s*;\s*/g, ';');
+                    processed = processed.replace(/\s*:\s*/g, ':');
+                    processed = processed.replace(/\s*,\s*/g, ',');
                 }
+                output.value = processed.trim();
             } catch (e) {
                 output.value = '';
                 errorElement.textContent = 'Error processing CSS.';
@@ -1721,7 +1513,219 @@
                 }, 2000);
             }
         }
-        
+
+        // ==================== REGEX TESTER ====================
+        function testRegex() {
+            const pattern = document.getElementById('regexPattern').value;
+            const flags = document.getElementById('regexFlags').value.toLowerCase().replace(/[^gimuy]/g, '');
+            const input = document.getElementById('regexInput').value;
+            const output = document.getElementById('regexOutput');
+            output.value = '';
+
+            if (pattern.trim() === '') {
+                return;
+            }
+
+            try {
+                const regex = new RegExp(pattern, flags);
+                let matches = [];
+
+                if (flags.includes('g')) {
+                    // Global match: use exec in a loop
+                    let match;
+                    while ((match = regex.exec(input)) !== null) {
+                        matches.push(match[0]);
+                    }
+                } else {
+                    // Non-global match: only the first match
+                    const match = input.match(regex);
+                    if (match) {
+                        matches.push(match[0]);
+                    }
+                }
+
+                if (matches.length > 0) {
+                    output.value = matches.join('\n');
+                } else {
+                    output.value = 'No matches found.';
+                }
+
+            } catch (e) {
+                output.value = 'Error: Invalid Regular Expression.';
+            }
+        }
+
+        // ==================== CSV TO JSON ====================
+        function convertCsvToJson() {
+            const csv = document.getElementById('csvInput').value.trim();
+            const output = document.getElementById('jsonOutputC');
+            output.classList.remove('error-border');
+
+            if (csv === '') {
+                output.value = '';
+                return;
+            }
+
+            try {
+                const lines = csv.split('\n');
+                if (lines.length === 0 || lines[0].trim() === '') {
+                    output.value = 'Error: No header row found.';
+                    output.classList.add('error-border');
+                    return;
+                }
+                
+                const headers = lines[0].split(',').map(h => h.trim());
+                const result = [];
+
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (line === '') continue;
+                    
+                    const obj = {};
+                    const currentLine = line.split(',');
+
+                    if (currentLine.length !== headers.length) {
+                        output.value = `Error: Line ${i + 1} has ${currentLine.length} columns, expected ${headers.length}.`;
+                        output.classList.add('error-border');
+                        return;
+                    }
+
+                    for (let j = 0; j < headers.length; j++) {
+                        const value = currentLine[j].trim();
+                        obj[headers[j]] = isNaN(Number(value)) || value === '' ? value : Number(value);
+                    }
+                    result.push(obj);
+                }
+
+                output.value = JSON.stringify(result, null, 2);
+
+            } catch (e) {
+                output.value = 'Error: Could not process CSV data.';
+                output.classList.add('error-border');
+            }
+        }
+
+        function copyJsonCOutput() {
+            const output = document.getElementById('jsonOutputC');
+            if (output.value) {
+                navigator.clipboard.writeText(output.value);
+                const btn = document.getElementById('jsonCCopyBtn');
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            }
+        }
+
+        // ==================== BASE CONVERTER ====================
+        function convertBase(source) {
+            const decInput = document.getElementById('decimalInput');
+            const hexInput = document.getElementById('hexInputB');
+            const binInput = document.getElementById('binaryInput');
+            let decValue = NaN;
+
+            // Clear all error classes
+            [decInput, hexInput, binInput].forEach(input => input.classList.remove('error-border'));
+
+            try {
+                if (source === 'dec') {
+                    decValue = parseInt(decInput.value.trim(), 10);
+                } else if (source === 'hex') {
+                    decValue = parseInt(hexInput.value.trim(), 16);
+                } else if (source === 'bin') {
+                    decValue = parseInt(binInput.value.trim(), 2);
+                }
+
+                if (isNaN(decValue) || decValue < 0 || (source === 'bin' && /[^01]/.test(binInput.value.trim()))) {
+                    if (source === 'dec') decInput.classList.add('error-border');
+                    if (source === 'hex') hexInput.classList.add('error-border');
+                    if (source === 'bin') binInput.classList.add('error-border');
+                    
+                    // Clear other fields to show error
+                    if (source !== 'dec') decInput.value = '';
+                    if (source !== 'hex') hexInput.value = '';
+                    if (source !== 'bin') binInput.value = '';
+                    return;
+                }
+
+                // Convert and update other fields
+                if (source !== 'dec') decInput.value = decValue.toString(10);
+                if (source !== 'hex') hexInput.value = decValue.toString(16).toUpperCase();
+                if (source !== 'bin') binInput.value = decValue.toString(2);
+
+            } catch (e) {
+                // Should be caught by isNaN check, but as a fallback
+                alert('Invalid input.');
+            }
+        }
+
+        // ==================== SLUG GENERATOR ====================
+        function generateSlug() {
+            const title = document.getElementById('titleInput').value;
+            const output = document.getElementById('slugOutput');
+
+            if (title.trim() === '') {
+                output.value = '';
+                return;
+            }
+
+            // 1. Convert to lowercase
+            let slug = title.toLowerCase();
+
+            // 2. Remove all non-alphanumeric characters except spaces and hyphens
+            slug = slug.replace(/[^a-z0-9\s-]/g, '');
+
+            // 3. Replace all white spaces (including tabs, new lines) with a single hyphen
+            slug = slug.replace(/\s+/g, '-');
+
+            // 4. Replace multiple hyphens with a single hyphen
+            slug = slug.replace(/-+/g, '-');
+
+            // 5. Trim hyphens from start and end
+            slug = slug.replace(/^-+|-+$/g, '');
+
+            output.value = slug;
+        }
+
+        function copySlugOutput() {
+            const output = document.getElementById('slugOutput');
+            if (output.value) {
+                navigator.clipboard.writeText(output.value);
+                const btn = document.getElementById('slugCopyBtn');
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            }
+        }
+
+        // ==================== LINE SORTER ====================
+        function sortItems(direction) {
+            const input = document.getElementById('sortInput');
+            let lines = input.value.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+            
+            if (lines.length === 0) return;
+
+            // Attempt a numeric sort if all lines appear to be numbers
+            const isNumeric = lines.every(line => !isNaN(parseFloat(line)) && isFinite(line));
+
+            if (isNumeric) {
+                lines.sort((a, b) => {
+                    const numA = parseFloat(a);
+                    const numB = parseFloat(b);
+                    return direction === 'asc' ? numA - numB : numB - numA;
+                });
+            } else {
+                // Perform a standard alphabetical sort
+                lines.sort((a, b) => {
+                    if (a < b) return direction === 'asc' ? -1 : 1;
+                    if (a > b) return direction === 'asc' ? 1 : -1;
+                    return 0;
+                });
+            }
+
+            input.value = lines.join('\n');
+        }
     </script>
 </body>
 </html>
